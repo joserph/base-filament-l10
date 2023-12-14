@@ -13,6 +13,10 @@ class UserPolicy
     public function viewAny(User $user): bool
     {
         return $user->hasRole('Super Admin');
+        // if($user->hasAllPermissions('view User')){
+        //     return true;
+        // }
+        // return false;
     }
 
     /**
@@ -20,7 +24,11 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $user->hasRole('Super Admin');
+        //return $user->hasRole('Super Admin');
+        if($user->hasAllPermissions('view User')){
+            return true;
+        }
+        return false;
     }
 
     /**

@@ -19,6 +19,8 @@ class RoleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Settings';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -29,6 +31,7 @@ class RoleResource extends Resource
                 Forms\Components\TextInput::make('guard_name')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Select::make('permissions')->multiple()->relationship('permissions', 'name')
             ]);
     }
 
@@ -65,7 +68,8 @@ class RoleResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\PermissionsRelationManager::class,
+            RelationManagers\UsersRelationManager::class,
         ];
     }
 
@@ -76,5 +80,10 @@ class RoleResource extends Resource
             'create' => Pages\CreateRole::route('/create'),
             'edit' => Pages\EditRole::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('name', '!=', 'Super Admin');
     }
 }

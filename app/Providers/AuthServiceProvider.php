@@ -3,7 +3,12 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
+use Spatie\Permission\Traits\HasRoles;
 
 class AuthServiceProvider extends ServiceProvider
 {
