@@ -15,16 +15,16 @@ class CreatePermission extends CreateRecord
         return $this->getResource()::getUrl('index');
     }
 
-    // protected function getCreatedNotificationTitle(): ?string
-    // {
-    //     return 'Permission registered';
-    // }
-
-    protected function getCreatedNotification(): ?Notification
+    protected function getCreatedNotificationTitle(): ?string
     {
-        return Notification::make()
-            ->success()
-            ->title('Permission registered')
-            ->body('The user has been created successfully.');
+        return 'Permission registered';
     }
+
+    // protected function getCreatedNotification(): ?Notification
+    // {
+    //     return Notification::make()
+    //         ->success()
+    //         ->title('Permission registered')
+    //         ->body('The user has been created successfully.');
+    // }
 }

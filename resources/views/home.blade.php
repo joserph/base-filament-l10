@@ -78,7 +78,7 @@
             </div>
         </div>
     </nav>
-
+    
 
     <div class="container mx-auto flex flex-wrap py-6">
 
@@ -88,7 +88,8 @@
                 <article class="flex flex-col shadow my-4">
                     <!-- Article Image -->
                     <a href="/{{ $item->slug }}" class="hover:opacity-75">
-                        <img src="http://localhost:8000/storage/{{ $item->image_url }}">
+                        {{-- <img src="/storage/app/public/{{ $item->image_url }}"> --}}
+                        <img src="{{ Storage::url($item->image_url) }}" alt="Test">
                     </a>
                     <div class="bg-white flex flex-col justify-start p-6">
                         <a href="#" class="text-blue-700 text-sm font-bold uppercase pb-4">{{ $item->category->name }}</a>
