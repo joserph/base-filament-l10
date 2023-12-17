@@ -12,11 +12,11 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('Super Admin');
-        // if($user->hasAllPermissions('view User')){
-        //     return true;
-        // }
-        // return false;
+        // return $user->hasRole('Super Admin');
+        if($user->hasAllPermissions('View User') || $user->hasRole('Super Admin')){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -25,7 +25,7 @@ class UserPolicy
     public function view(User $user, User $model): bool
     {
         //return $user->hasRole('Super Admin');
-        if($user->hasAllPermissions('view User')){
+        if($user->hasAllPermissions('View User') || $user->hasRole('Super Admin')){
             return true;
         }
         return false;
@@ -36,7 +36,10 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole('Super Admin');
+        if($user->hasAllPermissions('Create User') || $user->hasRole('Super Admin')){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -44,7 +47,10 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $user->hasRole('Super Admin');
+        if($user->hasAllPermissions('Update User') || $user->hasRole('Super Admin')){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -52,7 +58,10 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $user->hasRole('Super Admin');
+        if($user->hasAllPermissions('Delete User') || $user->hasRole('Super Admin')){
+            return true;
+        }
+        return false;
     }
 
     /**

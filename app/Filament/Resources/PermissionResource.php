@@ -7,6 +7,7 @@ use App\Filament\Resources\PermissionResource\RelationManagers;
 use App\Models\Permission;
 use Filament\Actions\CreateAction;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -33,10 +34,12 @@ class PermissionResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255)
-                    ->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('guard_name')
-                    ->required()
-                    ->maxLength(255),
+                    ->unique(ignoreRecord: true),   
+                Select::make('guard_name')
+                    ->options([
+                        'web' => 'Web',
+                        'api' => 'API',
+                    ]),
                 Forms\Components\Select::make('roles')->multiple()->relationship('roles', 'name')
                 
             ]);
