@@ -13,11 +13,7 @@ class CommentPolicy
      */
     public function viewAny(User $user): bool
     {
-        // if($user->hasPermissionTo('View Comment')){
-        //     return true;
-        // }
-        // return false;
-        if($user->hasRole('Super Admin')){
+        if($user->hasPermissionTo('View Comment') || $user->hasRole('Super Admin')){
             return true;
         }
         return false;
@@ -28,7 +24,7 @@ class CommentPolicy
      */
     public function view(User $user, Comment $comment): bool
     {
-        if($user->hasPermissionTo('View Comment')){
+        if($user->hasPermissionTo('View Comment') || $user->hasRole('Super Admin')){
             return true;
         }
         return false;
@@ -39,7 +35,7 @@ class CommentPolicy
      */
     public function create(User $user): bool
     {
-        if($user->hasPermissionTo('Create Comment')){
+        if($user->hasPermissionTo('Create Comment') || $user->hasRole('Super Admin')){
             return true;
         }
         return false;
@@ -50,7 +46,7 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment): bool
     {
-        if($user->hasPermissionTo('Update Comment')){
+        if($user->hasPermissionTo('Update Comment') || $user->hasRole('Super Admin')){
             return true;
         }
         return false;
@@ -61,7 +57,7 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment): bool
     {
-        if($user->hasPermissionTo('Delete Comment')){
+        if($user->hasPermissionTo('Delete Comment') || $user->hasRole('Super Admin')){
             return true;
         }
         return false;

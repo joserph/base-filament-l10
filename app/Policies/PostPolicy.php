@@ -13,11 +13,10 @@ class PostPolicy
      */
     public function viewAny(User $user): bool
     {
-        // if($user->hasPermissionTo('View Post')){
-        //     return true;
-        // }
-        // return false;
-        return $user->hasRole('Super Admin');
+        if($user->hasPermissionTo('View Post') || $user->hasRole('Super Admin')){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -25,7 +24,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post): bool
     {
-        if($user->hasPermissionTo('View Post')){
+        if($user->hasPermissionTo('View Post') || $user->hasRole('Super Admin')){
             return true;
         }
         return false;
@@ -36,7 +35,7 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        if($user->hasPermissionTo('Create Post')){
+        if($user->hasPermissionTo('Create Post') || $user->hasRole('Super Admin')){
             return true;
         }
         return false;
@@ -47,7 +46,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        if($user->hasPermissionTo('Update Post')){
+        if($user->hasPermissionTo('Update Post') || $user->hasRole('Super Admin')){
             return true;
         }
         return false;
@@ -58,7 +57,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        if($user->hasPermissionTo('Delete Post')){
+        if($user->hasPermissionTo('Delete Post') || $user->hasRole('Super Admin')){
             return true;
         }
         return false;

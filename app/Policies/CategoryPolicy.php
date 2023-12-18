@@ -13,11 +13,7 @@ class CategoryPolicy
      */
     public function viewAny(User $user): bool
     {
-        // if($user->hasPermissionTo('View Category')){
-        //     return true;
-        // }
-        // return false;
-        if($user->hasRole('Super Admin')){
+        if($user->hasPermissionTo('View Category') || $user->hasRole('Super Admin')){
             return true;
         }
         return false;
@@ -28,7 +24,7 @@ class CategoryPolicy
      */
     public function view(User $user, Category $category): bool
     {
-        if($user->hasPermissionTo('View Category')){
+        if($user->hasPermissionTo('View Category') || $user->hasRole('Super Admin')){
             return true;
         }
         return false;
@@ -39,7 +35,7 @@ class CategoryPolicy
      */
     public function create(User $user): bool
     {
-        if($user->hasPermissionTo('Create Category')){
+        if($user->hasPermissionTo('Create Category') || $user->hasRole('Super Admin')){
             return true;
         }
         return false;
@@ -50,7 +46,7 @@ class CategoryPolicy
      */
     public function update(User $user, Category $category): bool
     {
-        if($user->hasPermissionTo('Update Category')){
+        if($user->hasPermissionTo('Update Category') || $user->hasRole('Super Admin')){
             return true;
         }
         return false;
@@ -61,7 +57,7 @@ class CategoryPolicy
      */
     public function delete(User $user, Category $category): bool
     {
-        if($user->hasPermissionTo('Delete Category')){
+        if($user->hasPermissionTo('Delete Category') || $user->hasRole('Super Admin')){
             return true;
         }
         return false;
