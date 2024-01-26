@@ -3,9 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\Permission;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class PermissionSeeder extends Seeder
 {
@@ -50,5 +53,23 @@ class PermissionSeeder extends Seeder
         {
             Permission::create(['name' => $permission, 'guard_name' => 'web']);
         }
+        // Create Super Admin
+        $userAdmin = User::create([
+            'name'      => 'Admin',
+            'email'     => 'admin@admin.com',
+            'password'  => Hash::make('admin')
+        ]);
+        $rolAdmin = Role::create([
+            'name' => 'Admin',
+            'guard_name' => 'web'
+        ]);
+        
+        $rolAdmin = Role::create([
+            'name' => 'Super Admin',
+            'guard_name' => 'web'
+        ]);
+
+        // Table role_user
+        $userAdmin->roles()->sync([$rolAdmin->id]);
     }
 }
